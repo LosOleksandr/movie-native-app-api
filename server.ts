@@ -1,19 +1,31 @@
-import db from '@/db'
 import env from '@utils/env'
-import 'dotenv/config'
+import { sql } from 'bun'
 import express from 'express'
 
 const app = express()
 
 app.get('/', (req, res) => {
-    db.any('SELECT * FROM movies')
-        .then((movies) => {
-            return res.json(movies)
-        })
-        .catch((err) => {
-            console.error('Error fetching movies:', err)
-            res.status(500).send('Error fetching movies')
-        })
+    res.send('Hello World')
+})
+
+app.get('/users', async (req, res) => {
+    const users = await sql`SELECT * FROM sessions`
+    res.json(users)
+})
+
+app.post('/users', async (req, res) => {
+    const userData = {
+        username: 'Alice2',
+        email: 'alic1e@example.com',
+        password: 'password',
+    }
+
+    const [newUser] = await sql`
+        INSERT INTO users ${sql(userData)}
+        RETURNING *
+        `
+
+    res.json(newUser)
 })
 
 app.listen(env.PORT, () => {

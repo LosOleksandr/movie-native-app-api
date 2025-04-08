@@ -7,7 +7,7 @@ const checkEnv = (key: string) => {
 
 const env = {
     PORT: checkEnv('PORT'),
-    DATABASE_URL: checkEnv('DATABASE_URL'),
+    POSTGRES_URL: checkEnv('POSTGRES_URL'),
     NODE_ENV: process.env.NODE_ENV,
 }
 
