@@ -1,8 +1,12 @@
-import pgPromise from 'pg-promise'
-import env from '../utils/env'
+import env from '@utils/env'
+import { SQL } from 'bun'
 
-const pgp = pgPromise()
-
-const db = pgp(env.DATABASE_URL)
+const db = new SQL({
+    url: env.POSTGRES_URL,
+    max: 20,
+    idleTimeout: 30,
+    maxLifetime: 0,
+    connectionTimeout: 30,
+})
 
 export default db

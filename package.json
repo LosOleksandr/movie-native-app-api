@@ -5,8 +5,13 @@
     "private": true,
     "scripts": {
         "dev": "bun run --watch server.ts",
+        "dev:init": "bun run db:init && bun run --watch server.ts",
+        "start": "bun run dist/server.js",
+        "build": "bun run db:init && bun build server.ts --outdir dist --target bun --minify ",
         "lint": "eslint . --ext .ts",
-        "format": "prettier --write ."
+        "format": "prettier --write .",
+        "db:init": "bun run scripts/db/init.ts",
+        "db:reset": "bun run scripts/db/reset.ts"
     },
     "devDependencies": {
         "@eslint/js": "^9.24.0",
@@ -24,7 +29,6 @@
     },
     "dependencies": {
         "cors": "^2.8.5",
-        "express": "^5.1.0",
-        "pg-promise": "^11.13.0"
+        "express": "^5.1.0"
     }
 }
