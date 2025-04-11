@@ -1,3 +1,5 @@
+import errorHandler from '@/middlewares/error-handler'
+import router from '@/routes'
 import env from '@utils/env'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
@@ -6,6 +8,7 @@ const app = express()
 
 app.use(express.json())
 app.use(cookieParser())
+app.use(router)
 
 app.use(
     cors({
@@ -26,6 +29,8 @@ app.get('/', (req, res) => {
         },
     })
 })
+
+app.use(errorHandler)
 
 app.listen(env.PORT, () => {
     console.log(`Listening on port ${env.PORT}...`)
