@@ -8,12 +8,18 @@ const clearDatabase = async () => {
             WHERE schemaname = 'public';
         `
 
-        for (const row of tables) {
-            const tableName = row.tablename
-            await sql`TRUNCATE TABLE ${sql(tableName)} RESTART IDENTITY CASCADE;`
+        const tableNames = tables.map((row: { tablename: string }) => row.tablename).reverse()
+
+        for (const tableName of tableNames) {
+            if (['migrations', 'audit_log'].includes(tableName)) continue
+
+            await sql`
+                TRUNCATE TABLE ${sql(tableName)} RESTART IDENTITY CASCADE;
+            `
+            console.log(`Table ${tableName} has been truncated.`)
         }
 
-        console.log('Your data has been reset.')
+        console.log('Your data has been reset successfully.')
     } catch (err) {
         console.error('Error resetting database:', err)
     }

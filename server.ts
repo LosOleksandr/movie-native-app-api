@@ -1,31 +1,30 @@
 import env from '@utils/env'
-import { sql } from 'bun'
+import cookieParser from 'cookie-parser'
+import cors from 'cors'
 import express from 'express'
-
 const app = express()
 
+app.use(express.json())
+app.use(cookieParser())
+
+app.use(
+    cors({
+        origin: env.FRONTEND_URL,
+        credentials: true,
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+        allowedHeaders: ['Content-Type', 'Authorization'],
+        exposedHeaders: ['Authorization'],
+    })
+)
+
 app.get('/', (req, res) => {
-    res.send('Hello World')
-})
-
-app.get('/users', async (req, res) => {
-    const users = await sql`SELECT * FROM sessions`
-    res.json(users)
-})
-
-app.post('/users', async (req, res) => {
-    const userData = {
-        username: 'Alice2',
-        email: 'alic1e@example.com',
-        password: 'password',
-    }
-
-    const [newUser] = await sql`
-        INSERT INTO users ${sql(userData)}
-        RETURNING *
-        `
-
-    res.json(newUser)
+    res.json({
+        message: 'Welcome to the API!',
+        data: {
+            version: '1.0.0',
+            description: 'This is a basic API endpoint.',
+        },
+    })
 })
 
 app.listen(env.PORT, () => {

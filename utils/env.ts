@@ -1,14 +1,21 @@
+import { env as bunEnv } from 'bun'
+
 const checkEnv = (key: string) => {
-    if (!process.env[key]) {
+    if (!bunEnv[key]) {
         throw new Error(`${key} variable is not set`)
     }
-    return process.env[key]
+    return bunEnv[key]
 }
 
 const env = {
     PORT: checkEnv('PORT'),
     POSTGRES_URL: checkEnv('POSTGRES_URL'),
-    NODE_ENV: process.env.NODE_ENV,
+    ACCESS_TOKEN_SECRET: checkEnv('ACCESS_TOKEN_SECRET'),
+    REFRESH_TOKEN_SECRET: checkEnv('REFRESH_TOKEN_SECRET'),
+    ACCESS_TOKEN_EXPIRES_IN: checkEnv('ACCESS_TOKEN_EXPIRES_IN'),
+    REFRESH_TOKEN_EXPIRES_IN: checkEnv('REFRESH_TOKEN_EXPIRES_IN'),
+    FRONTEND_URL: checkEnv('FRONTEND_URL'),
+    APP_ENV: checkEnv('APP_ENV'),
 }
 
 export default env
