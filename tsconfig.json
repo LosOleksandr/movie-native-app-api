@@ -10,9 +10,13 @@
         "baseUrl": ".",
         "paths": {
             "@/*": ["src/*"],
-            "@utils/*": ["utils/*"]
+            "@utils/*": ["utils/*"],
+            "@/types/*": ["types/*"],
+            "@middlewares/*": ["src/middlewares/*"],
+            "@routes/*": ["src/routes/*"],
+            "@services/*": ["src/services/*"],
+            "@controllers/*": ["src/controllers/*"]
         },
-
         // Bundler mode
         "moduleResolution": "bundler",
         "allowImportingTsExtensions": true,
