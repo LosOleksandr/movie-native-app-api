@@ -6,10 +6,11 @@
     "scripts": {
         "dev": "bun run --watch server.ts",
         "dev:pull": "bun run db:pull && bun run --watch server.ts",
-        "start": "bun run dist/server.js",
+        "start": "bun dist/server.js",
         "build": "bun build server.ts --outdir dist --target bun --minify && bun run db:pull",
         "lint": "eslint . --ext .ts",
         "format": "prettier --write .",
+        "format:check": "prettier --check .",
         "db:pull": "bun run scripts/db/migrate.ts",
         "db:reset": "bun run scripts/db/reset.ts"
     },
