@@ -1,5 +1,4 @@
 import type { AuthCredentials } from '@/types/auth'
-import type { User } from '@/types/user'
 import setCookies, { resetCookies } from '@utils/cookies'
 import ServerError from '@utils/server-error'
 import type { Response } from 'express'
@@ -25,10 +24,7 @@ export default class AuthService {
         })
     }
 
-    public async register(
-        body: AuthCredentials,
-        res: Response
-    ): Promise<{ user: Omit<User, 'password'>; accessToken: string }> {
+    public async register(body: AuthCredentials, res: Response): Promise<{ token: string }> {
         const { email, password } = body
 
         const user = await this.userService.createUser({ email, password })
@@ -37,10 +33,10 @@ export default class AuthService {
 
         this.setAuthCookies(res, refreshToken)
 
-        return { user, accessToken }
+        return { token: accessToken }
     }
 
-    public async login(body: AuthCredentials, res: Response): Promise<{ accessToken: string }> {
+    public async login(body: AuthCredentials, res: Response): Promise<{ token: string }> {
         const { email, password } = body
 
         const user = await this.userService.getUserByEmail(email)
@@ -59,7 +55,7 @@ export default class AuthService {
 
         this.setAuthCookies(res, refreshToken)
 
-        return { accessToken }
+        return { token: accessToken }
     }
 
     public async logout(res: Response): Promise<void> {
@@ -68,7 +64,7 @@ export default class AuthService {
         })
     }
 
-    public async refresh(refreshToken: string, res: Response): Promise<{ accessToken: string }> {
+    public async refresh(refreshToken: string, res: Response): Promise<{ token: string }> {
         if (!refreshToken) {
             throw ServerError.unauthorized('Refresh token is invalid or expired')
         }
@@ -86,6 +82,6 @@ export default class AuthService {
             token = accessToken
         })
 
-        return { accessToken: token }
+        return { token }
     }
 }
