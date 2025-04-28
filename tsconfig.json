@@ -15,7 +15,8 @@
             "@middlewares/*": ["src/middlewares/*"],
             "@routes/*": ["src/routes/*"],
             "@services/*": ["src/services/*"],
-            "@controllers/*": ["src/controllers/*"]
+            "@controllers/*": ["src/controllers/*"],
+            "@constants/*": ["constants/*"]
         },
         // Bundler mode
         "moduleResolution": "bundler",

@@ -15,6 +15,8 @@ const env = {
     ACCESS_TOKEN_EXPIRES_IN: checkEnv('ACCESS_TOKEN_EXPIRES_IN'),
     REFRESH_TOKEN_EXPIRES_IN: checkEnv('REFRESH_TOKEN_EXPIRES_IN'),
     FRONTEND_URL: checkEnv('FRONTEND_URL'),
+    TMBD_BASE_URL: checkEnv('TMBD_BASE_URL'),
+    TMDB_API_KEY: checkEnv('TMDB_API_KEY'),
     APP_ENV: checkEnv('APP_ENV'),
 }
 

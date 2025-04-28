@@ -1,4 +1,4 @@
-import AuthService from '@/services/auth'
+import AuthService from '@/services/auth/auth'
 import type { Request, Response } from 'express'
 
 class AuthController {

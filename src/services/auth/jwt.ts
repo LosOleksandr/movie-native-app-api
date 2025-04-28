@@ -3,7 +3,7 @@ import env from '@utils/env'
 import ServerError from '@utils/server-error'
 import jwt from 'jsonwebtoken'
 
-class JWTService {
+export default class JWTService {
     private readonly ACCESS_TOKEN_SECRET: string
     private readonly REFRESH_TOKEN_SECRET: string
     private readonly ACCESS_TOKEN_EXPIRES_IN: string
@@ -73,5 +73,3 @@ class JWTService {
         })
     }
 }
-
-export default JWTService
