@@ -2,8 +2,8 @@ import type { AuthCredentials } from '@/types/auth'
 import setCookies, { resetCookies } from '@utils/cookies'
 import ServerError from '@utils/server-error'
 import type { Response } from 'express'
+import UserService from '../user'
 import JWTService from './jwt'
-import UserService from './user'
 
 export default class AuthService {
     private readonly userService: UserService

@@ -1,4 +1,4 @@
-import JWTService from '@/services/jwt'
+import JWTService from '@/services/auth/jwt'
 import type { AuthRequest } from '@/types/auth'
 import ServerError from '@utils/server-error'
 import type { NextFunction, Response } from 'express'
